@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     TextView userScore, compScore;
     ImageView dice;
     final int[] image_dice = new int[]{0,R.drawable.dice1,R.drawable.dice2,R.drawable.dice3,R.drawable.dice4,R.drawable.dice5,R.drawable.dice6};
-    int i=0; //index of Dice image
+    int i=0;
     final Random r = new Random();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +33,14 @@ public class MainActivity extends AppCompatActivity {
         dice = (ImageView) findViewById(R.id.image_dice);
         Roll.setEnabled(true);
         Hold.setEnabled(true);
-
+        Reset.setEnabled(false);
+        userScore.setText("0");
+        compScore.setText("0");
 
         Reset.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                dice.setImageResource(image_dice[0]);
+                dice.setImageResource(image_dice[1]);
                 user_overall = 0;
                 user_turn = 0;
                 comp_overall = 0;
@@ -74,25 +76,26 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 userScore.setText(Integer.toString(user_overall));
                 i=1;
-                compRoll();
-
             }
         });
     }
 
     public void compRoll(){
+        userScore.setText("hello");
         Roll.setEnabled(false);
         Hold.setEnabled(false);
         comp_turn = r.nextInt(image_dice.length);
-        while(i!=0) {
+
+        while(2>1) {
             if (comp_turn == 0) ;
             else if (comp_turn == 1) {
                 compScore.setText(Integer.toString(comp_overall));
+                i=0;
                 Roll.setEnabled(true);
                 Hold.setEnabled(true);
-                i=0;
                 break;
-            } else {
+            }
+            else {
                 comp_overall += comp_turn;
             }
         }
